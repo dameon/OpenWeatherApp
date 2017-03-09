@@ -12,6 +12,7 @@
 		A62007511E71B2600017A701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A620074F1E71B2600017A701 /* Main.storyboard */; };
 		A62007531E71B2600017A701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A62007521E71B2600017A701 /* Assets.xcassets */; };
 		A62007561E71B2600017A701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A62007541E71B2600017A701 /* LaunchScreen.storyboard */; };
+		A620075E1E71B5DC0017A701 /* GetWeahterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A620075D1E71B5DC0017A701 /* GetWeahterData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		A62007521E71B2600017A701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A62007551E71B2600017A701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A62007571E71B2600017A701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A620075D1E71B5DC0017A701 /* GetWeahterData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWeahterData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				A620074B1E71B2600017A701 /* AppDelegate.swift */,
 				A620074D1E71B2600017A701 /* ViewController.swift */,
+				A620075D1E71B5DC0017A701 /* GetWeahterData.swift */,
 				A620074F1E71B2600017A701 /* Main.storyboard */,
 				A62007521E71B2600017A701 /* Assets.xcassets */,
 				A62007541E71B2600017A701 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			files = (
 				A620074E1E71B2600017A701 /* ViewController.swift in Sources */,
 				A620074C1E71B2600017A701 /* AppDelegate.swift in Sources */,
+				A620075E1E71B5DC0017A701 /* GetWeahterData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
