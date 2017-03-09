@@ -11,7 +11,6 @@ import UIKit
 class GetWeahterData: UIViewController {
     
     private let openWeatherMapBaseURL = "http://api.openweathermap.org/data/2.5/weather"
-    
     private let openWeatherMapAPIKey = "c5be46e0fd913db5fb370221ee81a4e1"
 
     override func viewDidLoad() {
