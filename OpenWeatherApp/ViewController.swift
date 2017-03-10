@@ -23,6 +23,12 @@ class ViewController: UIViewController, WeatherGetterDelegate, UITextFieldDelega
         super.viewDidLoad()
         weather = GetWeahterData (delegate: self)
         
+        let userInfo = UserDefaults.standard
+        if let city = userInfo.string(forKey: "lastCitySearch") {
+            cityTextField.text = city
+            getWeatherByCity(self)
+        }
+        
         clearUI()
     }
     
@@ -30,12 +36,13 @@ class ViewController: UIViewController, WeatherGetterDelegate, UITextFieldDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
-    @IBAction func getWeatherByCity(_ sender: UIButton) {
+    @IBAction func getWeatherByCity(_ sender: Any) {
         guard let text = cityTextField.text, !text.isEmpty else {
             return
         }
-        weather.getWeather(city: cityTextField.text!)
+        weather.getWeather(city: cityTextField.text!.urlEncoded)
     }
     
     // MARK: Keyboard Stuff
@@ -99,6 +106,10 @@ class ViewController: UIViewController, WeatherGetterDelegate, UITextFieldDelega
         }
         print("didNotGetWeather error: \(error)")
     }
-
 }
 
+extension String {
+    var urlEncoded: String {
+        return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlUserAllowed)!
+    }
+}

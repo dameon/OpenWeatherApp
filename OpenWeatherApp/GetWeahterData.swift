@@ -25,6 +25,14 @@ class GetWeahterData {
         self.delegate = delegate
     }
     
+    func saveLastSuccesfulSearch(searchedCity: String) {
+        //Store last city searched
+        let lastCitySearch = searchedCity
+        let userInfo = UserDefaults.standard
+        userInfo.setValue(lastCitySearch, forKey: "lastCitySearch")
+
+    }
+    
     func getWeatherByCity(city: String) {
         let weatherRequestURL = (string: "\(openWeatherMapBaseURL)?APPID=\(openWeatherMapAPIKey)&q=\(city)")
         getWeather(city: weatherRequestURL)
@@ -54,9 +62,10 @@ class GetWeahterData {
                 
                 let weather = Weather(weatherData: weatherData)
                 self.delegate.didGetWeather(weather: weather)
-                    
-                print("City: \(weatherData["name"]!)")
-                print("Temperature: \(weatherData["main"]!["temp"]!!)")
+                 
+                 //save last succesfull search
+                 self.saveLastSuccesfulSearch(searchedCity: city)
+                
                 }
                 catch let jsonError as NSError {
                     // An error occurred while trying to convert the data into a Swift dictionary.
