@@ -10,17 +10,8 @@ import Foundation
 
 struct Weather {
     
-//    let dateAndTime: NSDate
-    
     let city: String
-//    let country: String
-//    let longitude: Double
-//    let latitude: Double
-    
-//    let weatherID: Int
-//    let mainWeather: String
-//    let weatherDescription: String
-//    let weatherIconID: String
+    let weatherIconID: String
     
     private let temp: Double
     var tempCelsius: Double {
@@ -36,9 +27,12 @@ struct Weather {
 
     init(weatherData: [String: AnyObject]) {
         city = weatherData["name"] as! String
+        
         let mainDict = weatherData["main"] as! [String: AnyObject]
         temp = mainDict["temp"] as! Double
-
+        
+        let weatherDict = weatherData["weather"]![0] as! [String: AnyObject]
+        weatherIconID = weatherDict["icon"] as! String
     }
     
 }

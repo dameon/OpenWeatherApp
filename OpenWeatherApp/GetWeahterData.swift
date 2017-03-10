@@ -42,11 +42,11 @@ class GetWeahterData {
         let dataTask = session.dataTask(with: weatherRequest as URLRequest, completionHandler: { (data, response, error) in
             // do stuff with response, data & error here
             if let error = error {
-                                // Case 1: Error
+                                // Error
                                 print("Error:\n\(error)")
                             }
                             else {
-                                // Case 2: Success
+                                // Success
                 do {
                 let weatherData =  try JSONSerialization.jsonObject(
                     with: data!,

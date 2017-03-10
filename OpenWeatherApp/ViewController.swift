@@ -11,13 +11,13 @@ import UIKit
 class ViewController: UIViewController, WeatherGetterDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var getCityWeatherButton: UIButton!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var cityTextField: UITextField!
     
     var weather: GetWeahterData!
+    private var openWeatherImageURL = "http://openweathermap.org/img/w/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +84,11 @@ class ViewController: UIViewController, WeatherGetterDelegate, UITextFieldDelega
         DispatchQueue.main.async {
             self.cityLabel.text = weather.city
             self.temperatureLabel.text = "\(Int(round(weather.tempCelsius)))°"
+            
+            let imageURL = URL(string: self.openWeatherImageURL.appending(weather.weatherIconID).appending(".png"))
+            if let data = try? Data(contentsOf: imageURL!){
+            self.weatherImage.image = UIImage(data: data)
+            }
     }
 }
     
