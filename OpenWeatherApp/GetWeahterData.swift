@@ -8,25 +8,31 @@
 
 import UIKit
 
-class GetWeahterData: UIViewController {
+    // Mark: Delegates
+protocol WeatherGetterDelegate {
+    func didGetWeather(weather: Weather)
+    func didNotGetWeather(error: NSError)
+}
+
+class GetWeahterData {
     
+    // Mark: Properties
     private let openWeatherMapBaseURL = "http://api.openweathermap.org/data/2.5/weather"
     private let openWeatherMapAPIKey = "c5be46e0fd913db5fb370221ee81a4e1"
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private var delegate: WeatherGetterDelegate
+    
+    init(delegate: WeatherGetterDelegate) {
+        self.delegate = delegate
     }
     
+    func getWeatherByCity(city: String) {
+        let weatherRequestURL = (string: "\(openWeatherMapBaseURL)?APPID=\(openWeatherMapAPIKey)&q=\(city)")
+        getWeather(city: weatherRequestURL)
+    }
+    
+    // Mark: WeatherGetter
     func getWeather(city: String) {
         
-        // This is a pretty simple networking task, so the shared session will do.
         let session = URLSession.shared
         
         let weatherRequestURL = URL(string: "\(openWeatherMapBaseURL)?APPID=\(openWeatherMapAPIKey)&q=\(city)")!
@@ -41,23 +47,26 @@ class GetWeahterData: UIViewController {
                             }
                             else {
                                 // Case 2: Success
-                                print("Data:\n\(data!)")
+                do {
+                let weatherData =  try JSONSerialization.jsonObject(
+                    with: data!,
+                    options: .mutableContainers) as! [String: AnyObject]
+                
+                let weather = Weather(weatherData: weatherData)
+                self.delegate.didGetWeather(weather: weather)
+                    
+                print("City: \(weatherData["name"]!)")
+                print("Temperature: \(weatherData["main"]!["temp"]!!)")
+                }
+                catch let jsonError as NSError {
+                    // An error occurred while trying to convert the data into a Swift dictionary.
+                    print("JSON error description: \(jsonError.description)")
+                }
             }
         })
         
         // The data task is set up...now go!!
         dataTask.resume()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
